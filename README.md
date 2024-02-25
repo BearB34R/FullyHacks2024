@@ -31,3 +31,7 @@ We'll use a neon-themed UI to make our application visually striking. This will 
 By the end of this project, we aim to have a solid understanding of these technologies and be able to build full-stack web applications from scratch. We'll also have a portfolio piece that demonstrates our skills and learning journey.
 
 edit: we didn't manage to aquire a free news api so the heroku deployment won't work correctly. However the locally run server will.
+
+(try by pulling then run "npm run devStart" to start a local server, you need nodejs to start the server)
+
+Link: https://deploying-neon-news-0469d6666bdc.herokuapp.com/
