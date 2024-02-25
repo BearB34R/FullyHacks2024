@@ -27,6 +27,7 @@ a {
 }
 
 h1 {
+  white-space: nowrap;
   font-weight: 400;
   animation: glow 0.5s ease-in-out infinite alternate;
 }
@@ -39,6 +40,22 @@ h1 {
   0% {
     text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #03bcf4,
       0 0 73px #03bcf4, 0 0 80px #03bcf4, 0 0 94px #03bcf4, 0 0 140px #03bcf4;
+  }
+}
+
+@keyframes animate {
+  0% {
+    color: #1f778f;
+    text-shadow: none;
+  }
+  50% {
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4, 0 0 20px #03bcf4, 0 0 40px #03bcf4,
+      0 0 80px #03bcf4, 0 0 160px #03bcf4;
+  }
+  100% {
+    color: #2991ad;
+    text-shadow: none;
   }
 }
 
@@ -104,9 +121,13 @@ button img {
 }
 
 .no-articles {
-  color: white;
-  text-align: center;
-  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #03bcf4,
+    0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
+  user-select: none;
+  height: 100vh;
+  font-size: 100px;
   font-weight: 500;
   margin-top: 20px;
+  animation: animate 3s linear infinite;
 }

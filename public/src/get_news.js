@@ -3,7 +3,6 @@ window.myParam = urlParams.get("q"); // set it as a global variable
 
 function getNews(query) {
   var apiKey = "842fad4e5f5e41f18b790f19082cd425";
-  var apiKey2 = "89a96d39713aee1a524a6c83058f64f8";
 
   // Get today's date
   var today = new Date();
@@ -16,7 +15,6 @@ function getNews(query) {
   var formattedDate = oneWeekAgo.toISOString().split("T")[0];
 
   var url = `https://newsapi.org/v2/top-headlines?q=${query}&from=${formattedDate}&sortBy=popularity&apiKey=${apiKey}`;
-  var url2 = `http://api.mediastack.com/v1/news&access_key=${apiKey2}&languages=en`;
 
   fetch(url)
     .then(function (response) {
@@ -28,7 +26,7 @@ function getNews(query) {
         // Create a new div element
         var noArticles = document.createElement("div");
         noArticles.className = "no-articles"; // assign a class
-        noArticles.textContent = "No articles found";
+        noArticles.textContent = "No articles found :(";
         document.body.appendChild(noArticles);
       } else {
         data.articles.forEach((article) => {
