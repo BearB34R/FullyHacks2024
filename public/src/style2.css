@@ -16,6 +16,11 @@ body {
     0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+}
+
 h1 {
   font-weight: 400;
   animation: glow 0.5s ease-in-out infinite alternate;
@@ -47,7 +52,7 @@ h1 {
 }
 
 .box {
-  height: 40px;
+  height: 30px;
   width: 325px;
   display: flex;
   cursor: pointer;
@@ -63,23 +68,23 @@ h1 {
   border: none;
   background-color: white;
   cursor: pointer;
-  transform: translateY(-50%);
-  transform: translateX(100%);
+  transform: translate3d(290px, -20px, 10px);
 }
 
 .box input {
-  width: 525px;
+  width: 600px;
   height: 20px;
 }
 
 .box input {
-  width: 1000;
-  height: 40px;
+  width: 1000px;
+  height: 30px;
   outline: none;
   border: none;
   font-weight: 500;
   transition: 0.8s;
   background: transparent;
+  transform: translate3d(-12px, 20px, 10px);
 }
 
 button img {
