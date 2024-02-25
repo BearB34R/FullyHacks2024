@@ -34,8 +34,6 @@ h1 {
 
 .article {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #03bcf4,
-    0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
 }
 
 .description {
@@ -44,5 +42,6 @@ h1 {
 }
 
 .url {
-  text-shadow: none;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #03bcf4,
+    0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
 }
