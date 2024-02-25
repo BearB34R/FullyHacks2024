@@ -11,6 +11,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #07252d;
+  font-family: "Vibur", sans-serif;
 }
 h2 {
   position: relative;
@@ -23,26 +24,8 @@ h2 {
   line-height: 0.3em;
   outline: none;
   animation: animate 3s linear infinite;
-  transform: translateY(-400%);
+  transform: translateY(-200%);
   user-select: none;
-}
-
-h3 {
-  position: relative;
-  font-size: 5em;
-  letter-spacing: 5px;
-  color: #0e3742;
-  text-transform: uppercase;
-  width: 100%;
-  text-align: center;
-  line-height: 0.3em;
-  outline: none;
-  animation: animate 3s linear infinite;
-  transform: translateY(-400%);
-  user-select: none;
-}
-h2:first-child {
-  margin-bottom: 0.5em;
 }
 
 @keyframes animate {
@@ -58,7 +41,7 @@ h2:first-child {
 }
 .box {
   height: 40px;
-  width: 500px;
+  width: 700px;
   display: flex;
   cursor: pointer;
   padding: 10px 20px;
