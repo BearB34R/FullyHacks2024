@@ -7,8 +7,10 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 const userRouter = require("./routes/users");
+const newsRouter = require("./routes/news");
 
 app.use("/users", userRouter);
+app.use("/news", newsRouter);
 
 app.listen(process.env.PORT || 3000);
 

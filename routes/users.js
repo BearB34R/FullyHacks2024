@@ -10,13 +10,6 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/", (res, req) => {
-  const isValid = true;
-  //   if (isValid) {
-  //     users.push({ name: req.body.name });
-  //     res.redirect("/users/" + (users.length - 1));
-  //   } else {
-  //     res.render("users/new", { firstName: req.body.firstName });
-  //   }
   console.log(res.body.firstName);
   res.send("hi");
 });
