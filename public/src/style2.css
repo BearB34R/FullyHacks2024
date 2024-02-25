@@ -1,17 +1,19 @@
 * {
   margin: 0.4%;
-  padding: 0.3%;
+  padding: 0.5%;
 }
 
 body {
   background-color: #07252d;
   font-family: "Vibur", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./bricks.jpg);
 }
 
 .neonText {
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #f09,
-    0 0 82px #f09, 0 0 92px #f09, 0 0 102px #f09, 0 0 120px #f09;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #03bcf4,
+    0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
 }
 
 h1 {
@@ -21,23 +23,26 @@ h1 {
 
 @keyframes glow {
   100% {
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09,
-      0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #03bcf4,
+      0 0 80px #03bcf4, 0 0 90px #03bcf4, 0 0 100px #03bcf4, 0 0 150px #03bcf4;
   }
   0% {
-    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09,
-      0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #03bcf4,
+      0 0 73px #03bcf4, 0 0 80px #03bcf4, 0 0 94px #03bcf4, 0 0 140px #03bcf4;
   }
 }
 
 .article {
-  /* styles for the article div */
+  color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #03bcf4,
+    0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
 }
 
 .description {
-  /* styles for the description */
+  color: white;
+  text-shadow: none;
 }
 
 .url {
-  /* styles for the url */
+  text-shadow: none;
 }
