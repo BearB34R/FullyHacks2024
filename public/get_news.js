@@ -1,6 +1,17 @@
 function getNews(query) {
   var apiKey = "842fad4e5f5e41f18b790f19082cd425";
-  var url = `https://newsapi.org/v2/everything?q=${query}&from=2024-02-25&sortBy=popularity&apiKey=${apiKey}`;
+
+  // Get today's date
+  var today = new Date();
+
+  // Calculate the date one week ago
+  var oneWeekAgo = new Date(today);
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+  // Format the date in YYYY-MM-DD format
+  var formattedDate = oneWeekAgo.toISOString().split("T")[0];
+
+  var url = `https://newsapi.org/v2/top-headlines?q=${query}&from=${formattedDate}&sortBy=popularity&apiKey=${apiKey}`;
 
   fetch(url)
     .then(function (response) {
@@ -15,5 +26,5 @@ function getNews(query) {
 }
 
 // Example usage:
-var userQuery = "Microsoft";
+var userQuery = "Bitcoin";
 getNews(userQuery);
