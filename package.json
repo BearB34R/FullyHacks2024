@@ -1,0 +1,27 @@
+{
+  "name": "fullyhacks2024",
+  "version": "1.0.0",
+  "description": "1. pull from a news api 2. Javascript, html, css, nodejs, express, heroku 3. integrate chatgpt to summarize news article 4. NeonUi",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BearB34R/FullyHacks2024.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BearB34R/FullyHacks2024/issues"
+  },
+  "homepage": "https://github.com/BearB34R/FullyHacks2024#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
