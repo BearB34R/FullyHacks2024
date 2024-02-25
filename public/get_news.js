@@ -25,19 +25,23 @@ function getNews(query) {
       data.articles.forEach((article) => {
         // Create a new div element for each article
         var articleDiv = document.createElement("div");
+        articleDiv.className = "article"; // assign a class
 
         // Create a h2 element for the title
         var title = document.createElement("h2");
+        title.className = "title"; // assign a class
         title.textContent = article.title;
         articleDiv.appendChild(title);
 
         // Create a p element for the description
         var description = document.createElement("p");
+        description.className = "description"; // assign a class
         description.textContent = article.description;
         articleDiv.appendChild(description);
 
         // Create an a element for the URL
         var url = document.createElement("a");
+        url.className = "url"; // assign a class
         url.href = article.url;
         url.textContent = "Read more";
         articleDiv.appendChild(url);
