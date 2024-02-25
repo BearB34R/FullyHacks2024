@@ -38,10 +38,57 @@ h1 {
 
 .description {
   color: white;
-  text-shadow: none;
 }
 
 .url {
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #03bcf4,
     0 0 82px #03bcf4, 0 0 92px #03bcf4, 0 0 102px #03bcf4, 0 0 120px #03bcf4;
+  user-select: none;
+}
+
+.box {
+  height: 40px;
+  width: 325px;
+  display: flex;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 30px;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
+.box button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transform: translateX(100%);
+}
+
+.box input {
+  width: 525px;
+  height: 20px;
+}
+
+.box input {
+  width: 1000;
+  height: 40px;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  transition: 0.8s;
+  background: transparent;
+}
+
+button img {
+  width: 20px;
+  height: 20px;
+  border: none;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
 }
