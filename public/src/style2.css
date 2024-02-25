@@ -21,6 +21,11 @@ body {
   align-items: center;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 h1 {
   font-weight: 400;
   animation: glow 0.5s ease-in-out infinite alternate;
