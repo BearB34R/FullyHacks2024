@@ -10,7 +10,7 @@ const userRouter = require("./routes/users");
 
 app.use("/users", userRouter);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 // npm run devStart to start
 //842fad4e5f5e41f18b790f19082cd425 api key for newsapi
