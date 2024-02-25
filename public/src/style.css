@@ -80,3 +80,13 @@ h2:first-child {
   transition: 0.8s;
   background: transparent;
 }
+
+button img {
+  width: 20px;
+  height: 20px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+}
