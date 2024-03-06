@@ -1,8 +1,9 @@
 const urlParams = new URLSearchParams(window.location.search);
 window.myParam = urlParams.get("q"); // set it as a global variable
+require("dotenv").config();
 
 function getNews(query) {
-  var apiKey = "842fad4e5f5e41f18b790f19082cd425";
+  var apiKey = process.env.NEWS_API_KEY;
 
   // Get today's date
   var today = new Date();
