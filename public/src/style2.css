@@ -1,13 +1,15 @@
-* {
+/* * {
   margin: 0.4%;
   padding: 0.5%;
-}
+} */
 
 body {
   background-color: #07252d;
   font-family: "Vibur", sans-serif;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url(./bricks.jpg);
+  background-repeat: repeat-y;
+  background-size: cover;
 }
 
 .neonText {
@@ -106,13 +108,14 @@ h1 {
   font-weight: 500;
   transition: 0.8s;
   background: transparent;
-  transform: translate3d(-12px, 20px, 10px);
+  transform: translate3d(-1px, 13px, 10px);
 }
 
 button img {
   width: 20px;
   height: 20px;
   border: none;
+  transform: translate3d(0px, 7px, 10px);
 }
 
 .search-icon {
