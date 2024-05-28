@@ -18,6 +18,4 @@ const newsRouter = require("./routes/news");
 app.use("/users", userRouter);
 app.use("/news", newsRouter);
 
-console.log(process.env.test);
-
 app.listen(process.env.PORT || 3000);
