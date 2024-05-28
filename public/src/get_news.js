@@ -2,7 +2,8 @@ const urlParams = new URLSearchParams(window.location.search);
 window.myParam = urlParams.get("q"); // set it as a global variable
 
 function getNews(query) {
-  var url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&q=${query}&language=en`;
+  var NEWS_API = process.env.NEWS_API_KEY;
+  var url = `https://newsdata.io/api/1/news?apikey=${NEWS_API}&q=${query}&language=en`;
 
   fetch(url)
     .then(function (response) {
