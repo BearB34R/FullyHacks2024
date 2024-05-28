@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+require("dotenv").config();
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -16,5 +17,8 @@ const newsRouter = require("./routes/news");
 
 app.use("/users", userRouter);
 app.use("/news", newsRouter);
+
+console.log(process.env.test);
+print(process.env.test);
 
 app.listen(process.env.PORT || 3000);
