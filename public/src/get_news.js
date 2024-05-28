@@ -1,3 +1,6 @@
+const express = require("express");
+const app = express();
+
 const urlParams = new URLSearchParams(window.location.search);
 window.myParam = urlParams.get("q"); // set it as a global variable
 
