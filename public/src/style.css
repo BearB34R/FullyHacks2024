@@ -113,12 +113,20 @@ button img {
   margin-bottom: 2rem;
   border-radius: 8px;
   color: var(--text-light);
+  position: relative;
+  overflow: hidden;
 }
 
 .article__title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1.5;
+  display: block;
 }
 
 .article__image-container {

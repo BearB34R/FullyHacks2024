@@ -6,18 +6,34 @@ class NewsApp {
     this.articlesPerPage = 5;
     this.articles = [];
     this.setupEventListeners();
+    
+    // Check for URL parameters on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q');
+    if (query) {
+      this.performSearch(query);
+      // Update input field with search term
+      const input = this.searchForm.querySelector('input[name="q"]');
+      if (input) input.value = query;
+    }
   }
 
   setupEventListeners() {
     this.searchForm?.addEventListener('submit', (e) => {
       e.preventDefault();
-      this.currentPage = 1;
-      this.handleSearch();
+      const formData = new FormData(this.searchForm);
+      const query = formData.get('q')?.trim();
+      if (query) {
+        // Update URL without page reload
+        const url = new URL(window.location);
+        url.searchParams.set('q', query);
+        window.history.pushState({}, '', url);
+        this.performSearch(query);
+      }
     });
   }
 
-  async handleSearch() {
-    const query = new URLSearchParams(new FormData(this.searchForm)).get('q')?.trim();
+  async performSearch(query) {
     if (!query) {
       this.showError('Please enter a search term');
       return;

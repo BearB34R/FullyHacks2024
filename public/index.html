@@ -17,13 +17,14 @@
             type="text"
             placeholder="Search any topic for the latest news..."
             name="q"
+            required
           />
           <button type="submit"><img src="./src/searchIcon.png" /></button>
         </form>
       </div>
-      <div id="results" class="results-container">
-        <!-- Articles will be inserted here -->
-      </div>
+      <div id="results" class="results-container"></div>
     </div>
+    <!-- Add script to handle search -->
+    <script src="./src/get_news.js"></script>
   </body>
 </html>
