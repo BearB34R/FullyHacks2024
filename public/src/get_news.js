@@ -1,56 +1,156 @@
-const urlParams = new URLSearchParams(window.location.search);
-window.myParam = urlParams.get("q"); // set it as a global variable
+class NewsApp {
+  constructor() {
+    this.searchForm = document.querySelector('form');
+    this.resultsContainer = document.querySelector('#results');
+    this.currentPage = 1;
+    this.articlesPerPage = 5;
+    this.articles = [];
+    this.setupEventListeners();
+  }
 
-const NEWS_API_KEY = "pub_45055c577cfef4b958e8ae006c28a4caceb50";
-
-function getNews(query) {
-  var url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&q=${query}&language=en`;
-
-  fetch(url)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      if (data.status === "success") {
-        data.results.forEach(function (article) {
-          // Create a div for the article
-          var articleDiv = document.createElement("div");
-          articleDiv.className = "article"; // assign a class
-
-          // Create a h2 element for the title
-          var title = document.createElement("h2");
-          title.textContent = article.title;
-          articleDiv.appendChild(title);
-
-          // Create a p element for the description
-          var description = document.createElement("p");
-          description.textContent = article.description;
-          articleDiv.appendChild(description);
-
-          // Create an img element for the image
-          var image = document.createElement("img");
-          image.src = article.image_url;
-          image.style.width = "200px"; // set width
-          image.style.height = "auto"; // set height to auto to maintain aspect ratio
-          articleDiv.appendChild(image);
-
-          // Create an a element for the URL
-          var url = document.createElement("a");
-          url.className = "url"; // assign a class
-          url.href = article.link;
-          url.textContent = "Read more";
-          url.style.display = "block"; // set display to block
-          articleDiv.appendChild(url);
-
-          // Append the article div to the body of the document
-          document.body.appendChild(articleDiv);
-        });
-      }
-    })
-    .catch(function (error) {
-      console.log("Error fetching data:", error);
+  setupEventListeners() {
+    this.searchForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.currentPage = 1;
+      this.handleSearch();
     });
+  }
+
+  async handleSearch() {
+    const query = new URLSearchParams(new FormData(this.searchForm)).get('q')?.trim();
+    if (!query) {
+      this.showError('Please enter a search term');
+      return;
+    }
+
+    try {
+      console.log('Sending search request for:', query); // Debug log
+      const response = await fetch(`/news/api/search?q=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      
+      console.log('Search response:', data); // Debug log
+
+      if (data.success && Array.isArray(data.articles)) {
+        this.articles = data.articles;
+        this.displayResults();
+      } else {
+        throw new Error(data.error || 'Invalid response format');
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      this.showError(`Failed to fetch news articles: ${error.message}`);
+    }
+  }
+
+  displayResults() {
+    if (!this.resultsContainer) return;
+    
+    if (!this.articles || this.articles.length === 0) {
+      this.resultsContainer.innerHTML = '<div class="no-articles">No articles found</div>';
+      return;
+    }
+
+    const startIndex = (this.currentPage - 1) * this.articlesPerPage;
+    const endIndex = startIndex + this.articlesPerPage;
+    const currentArticles = this.articles.slice(startIndex, endIndex);
+
+    try {
+      const articlesHtml = currentArticles
+        .map(article => this.createArticleHtml(article))
+        .join('');
+
+      this.resultsContainer.innerHTML = `
+        ${articlesHtml}
+        ${this.createPaginationControls()}
+      `;
+
+      this.setupPaginationListeners();
+    } catch (error) {
+      console.error('Error displaying results:', error);
+      this.showError('Error displaying articles');
+    }
+  }
+
+  createArticleHtml(article) {
+    if (!article.title || !article.link) return '';
+    
+    const safeTitle = this.escapeHtml(article.title);
+    const safeDescription = this.escapeHtml(article.description || 'No description available');
+    
+    return `
+      <article class="article">
+        <h2 class="article__title">${safeTitle}</h2>
+        ${article.image_url ? 
+          `<div class="article__image-container">
+            <img class="article__image" src="${article.image_url}" 
+                 alt="${safeTitle}" loading="lazy" 
+                 onerror="this.style.display='none'">
+           </div>` 
+          : ''
+        }
+        <p class="article__description">${safeDescription}</p>
+        <a href="${article.link}" class="article__link url" 
+           target="_blank" rel="noopener noreferrer">Read more</a>
+      </article>
+    `;
+  }
+
+  createPaginationControls() {
+    const totalPages = Math.ceil(this.articles.length / this.articlesPerPage);
+    if (totalPages <= 1) return '';
+
+    return `
+      <div class="pagination">
+        <button class="pagination__btn" 
+                data-page="prev" 
+                ${this.currentPage === 1 ? 'disabled' : ''}>
+          Previous
+        </button>
+        <span class="pagination__info">
+          Page ${this.currentPage} of ${totalPages}
+        </span>
+        <button class="pagination__btn" 
+                data-page="next"
+                ${this.currentPage === totalPages ? 'disabled' : ''}>
+          Next
+        </button>
+      </div>
+    `;
+  }
+
+  setupPaginationListeners() {
+    const totalPages = Math.ceil(this.articles.length / this.articlesPerPage);
+    
+    this.resultsContainer.querySelectorAll('.pagination__btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const direction = e.target.dataset.page;
+        if (direction === 'prev' && this.currentPage > 1) {
+          this.currentPage--;
+        } else if (direction === 'next' && this.currentPage < totalPages) {
+          this.currentPage++;
+        }
+        this.displayResults();
+      });
+    });
+  }
+
+  escapeHtml(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  showError(message) {
+    if (this.resultsContainer) {
+      this.resultsContainer.innerHTML = `<div class="error">${message}</div>`;
+    }
+  }
 }
-// Example usage:
-var userQuery = window.myParam;
-getNews(userQuery);
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new NewsApp();
+});
