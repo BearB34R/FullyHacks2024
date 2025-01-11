@@ -1,10 +1,12 @@
 {
-  "name": "fullyhacks2024",
+  "name": "neon-news",
   "version": "1.0.0",
-  "description": "1. pull from a news api 2. Javascript, html, css, nodejs, express, heroku 3. integrate chatgpt to summarize news article 4. NeonUi",
+  "description": "1. pull from a news api 2. Javascript, html, css, nodejs, express 3. integrate chatgpt to summarize news article 4. NeonUi",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "build": "cp -r public/* dist/",
+    "start": "serve dist"
   },
   "repository": {
     "type": "git",
@@ -21,9 +23,10 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^2.6.9"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "serve": "^14.0.0"
   }
 }
