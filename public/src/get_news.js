@@ -3,7 +3,6 @@ class NewsApp {
     this.searchForm = document.querySelector('form');
     this.resultsContainer = document.querySelector('#results');
     this.isMainPage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
-    // Add pagination initialization
     this.currentPage = 1;
     this.articlesPerPage = 5;
     this.articles = [];
@@ -48,13 +47,19 @@ class NewsApp {
     }
 
     try {
-      // Update API endpoint to use Netlify function
-      const response = await fetch(`/.netlify/functions/news?q=${encodeURIComponent(query)}`);
+      const apiUrl = window.location.hostname === 'localhost' 
+        ? `/news/api/search?q=${encodeURIComponent(query)}`
+        : `/.netlify/functions/news?q=${encodeURIComponent(query)}`;
+
+      const response = await window.fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
       
       if (data.success && Array.isArray(data.articles)) {
         this.articles = data.articles;
-        // Reset to first page when new search is performed
         this.currentPage = 1;
         this.displayResults();
       } else {
