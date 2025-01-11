@@ -131,6 +131,36 @@ h1 {
   transform: scale(1.1);
 }
 
+/* Remove old button image styles */
+button img {
+  display: none;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.arrow-icon {
+  font-size: 1.8rem;
+  display: inline-block;
+  color: var(--text-light);
+  text-shadow: 0 0 7px var(--text-light),
+               0 0 10px var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.arrow-icon:hover {
+  transform: translateX(5px);
+  text-shadow: 0 0 7px var(--text-light),
+               0 0 10px var(--primary-color),
+               0 0 21px var(--primary-color);
+}
+
 button img {
   width: 20px;
   height: 20px;
@@ -211,6 +241,7 @@ button img {
   margin: 1rem 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
