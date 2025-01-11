@@ -5,24 +5,28 @@
     <title>Neon News</title>
     <link rel="icon" href="./src/searchIcon.png" />
     <link rel="stylesheet" type="text/css" href="./src/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Vibur&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <div class="container">
-      <h2 contentediable="true">Neon News</h2>
-      <div class="box">
-        <form action="newsweb.html" method="GET">
-          <input
-            autocomplete="off"
-            type="text"
-            placeholder="Search any topic for the latest news..."
-            name="q"
-            required
-          />
-          <button type="submit"><img src="./src/searchIcon.png" /></button>
-        </form>
+      <h2 class="title">Neon News</h2>
+      <div class="search-wrapper">
+        <div class="box">
+          <form action="newsweb.html" method="GET">
+            <input
+              autocomplete="off"
+              type="text"
+              placeholder="Search any topic for the latest news..."
+              name="q"
+              required
+            />
+            <button type="submit" class="search-button">
+              <span class="arrow-icon">&rarr;</span>
+            </button>
+          </form>
+        </div>
       </div>
-      <div id="results" class="results-container"></div>
     </div>
     <!-- Add script to handle search -->
     <script src="./src/get_news.js"></script>

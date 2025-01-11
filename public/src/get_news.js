@@ -2,17 +2,23 @@ class NewsApp {
   constructor() {
     this.searchForm = document.querySelector('form');
     this.resultsContainer = document.querySelector('#results');
+    this.isMainPage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+    // Add pagination initialization
     this.currentPage = 1;
     this.articlesPerPage = 5;
     this.articles = [];
-    this.setupEventListeners();
     
-    // Check for URL parameters on load
+    if (!this.isMainPage) {
+      this.setupEventListeners();
+      this.checkUrlParams();
+    }
+  }
+
+  checkUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('q');
     if (query) {
       this.performSearch(query);
-      // Update input field with search term
       const input = this.searchForm.querySelector('input[name="q"]');
       if (input) input.value = query;
     }
@@ -20,15 +26,17 @@ class NewsApp {
 
   setupEventListeners() {
     this.searchForm?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(this.searchForm);
-      const query = formData.get('q')?.trim();
-      if (query) {
-        // Update URL without page reload
-        const url = new URL(window.location);
-        url.searchParams.set('q', query);
-        window.history.pushState({}, '', url);
-        this.performSearch(query);
+      // Don't prevent default on main page - allow normal form submission
+      if (!this.isMainPage) {
+        e.preventDefault();
+        const formData = new FormData(this.searchForm);
+        const query = formData.get('q')?.trim();
+        if (query) {
+          const url = new URL(window.location);
+          url.searchParams.set('q', query);
+          window.history.pushState({}, '', url);
+          this.performSearch(query);
+        }
       }
     });
   }
@@ -40,14 +48,13 @@ class NewsApp {
     }
 
     try {
-      console.log('Sending search request for:', query); // Debug log
       const response = await fetch(`/news/api/search?q=${encodeURIComponent(query)}`);
       const data = await response.json();
       
-      console.log('Search response:', data); // Debug log
-
       if (data.success && Array.isArray(data.articles)) {
         this.articles = data.articles;
+        // Reset to first page when new search is performed
+        this.currentPage = 1;
         this.displayResults();
       } else {
         throw new Error(data.error || 'Invalid response format');
@@ -66,18 +73,22 @@ class NewsApp {
       return;
     }
 
-    const startIndex = (this.currentPage - 1) * this.articlesPerPage;
-    const endIndex = startIndex + this.articlesPerPage;
-    const currentArticles = this.articles.slice(startIndex, endIndex);
-
     try {
+      const startIndex = (this.currentPage - 1) * this.articlesPerPage;
+      const endIndex = startIndex + this.articlesPerPage;
+      const currentArticles = this.articles.slice(startIndex, endIndex);
+
       const articlesHtml = currentArticles
         .map(article => this.createArticleHtml(article))
         .join('');
 
+      const paginationHtml = this.createPaginationControls();
+
       this.resultsContainer.innerHTML = `
-        ${articlesHtml}
-        ${this.createPaginationControls()}
+        <div class="articles-grid">
+          ${articlesHtml}
+        </div>
+        ${paginationHtml}
       `;
 
       this.setupPaginationListeners();
