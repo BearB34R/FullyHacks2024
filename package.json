@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon server.js",
-    "build": "cp -r public/* dist/",
+    "clean": "rm -rf dist",
+    "prebuild": "mkdir -p dist",
+    "build": "npm run clean && npm run prebuild && cp -r public/* dist/ && cp .env dist/",
     "start": "serve dist"
   },
   "repository": {
